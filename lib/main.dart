@@ -80,22 +80,74 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Name of Person to Annoy',
 
-              ),
-            ),
             TextField(
+              style: TextStyle(
+                color: Colors.white,
+              ),
               decoration: InputDecoration(
-                hintText: 'Your Name',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                  ),
+                ),
+                labelText: 'Name of Person to Annoy',
+                labelStyle: TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
+            SizedBox(height: 20),
             TextField(
+              style: TextStyle(
+                color: Colors.white,
+              ),
               decoration: InputDecoration(
-                hintText: 'Phone Number (Only accepts U.S. lines at the moment)',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                  ),
+                ),
+                labelText: 'Your Name',
+                labelStyle: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+
+            ),
+            SizedBox(height: 20),
+            TextField(
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.red,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                  ),
+                ),
+                labelText: 'Phone Number (U.S. only)',
+                labelStyle: TextStyle(
+                  color: Colors.white,
+                ),
               ),
             ),
+            SizedBox(height: 20),
             RaisedButton(
               color: Colors.red,
               onPressed: () {},
