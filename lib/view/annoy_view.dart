@@ -1,100 +1,127 @@
 import 'package:flutter/material.dart';
+import 'package:annoy_someone/utils/constants.dart';
+import 'package:annoy_someone/presenter/annoy_presenter.dart';
 
-class AnnoyWidget extends StatelessWidget {
-  AnnoyWidget(Color background){
-    this._backgroundColor = background;
+
+class AnnoyWidget extends StatefulWidget {
+  const AnnoyWidget({Key key}):super(key: key);
+  @override
+  _AnnoyState createState() => _AnnoyState();
+}
+
+class _AnnoyState extends State<AnnoyWidget> {
+  _AnnoyState(){
+    this._presenter = AnnoyPresenter();
   }
+  AnnoyPresenter _presenter;
 
   var _backgroundColor;
+  final toController = TextEditingController();
+  final fromController = TextEditingController();
+  final phoneNumController = TextEditingController();
 
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    toController.dispose();
+    fromController.dispose();
+    phoneNumController.dispose();
+    super.dispose();
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
-        color: Colors.transparent,
-        child: Column(
-          children: <Widget> [
-            SizedBox(height: 60),
-            TextField(
-              style: TextStyle(
-                color: Colors.white,
+      padding: EdgeInsets.all(20),
+      child: Column(
+        children: <Widget> [
+          SizedBox(height: 50),
+          TextField(
+            controller: toController,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.person, color: Colors.white,),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red,
+                ),
               ),
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                labelText: 'Name of Person to Annoy',
-                labelStyle: TextStyle(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
                   color: Colors.white,
                 ),
+              ),
+              labelText: LABEL_NAME_OF_PERSON_TO_ANNOY,
+              labelStyle: TextStyle(
+                color: Colors.white,
               ),
             ),
-            SizedBox(height: 20),
-            TextField(
-              style: TextStyle(
-                color: Colors.white,
+          ),
+          SizedBox(height: 30),
+          TextField(
+            controller: fromController,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.person, color: Colors.white,),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red,
+                ),
               ),
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                labelText: 'Your Name',
-                labelStyle: TextStyle(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
                   color: Colors.white,
                 ),
               ),
+              labelText: LABEL_YOUR_NAME,
+              labelStyle: TextStyle(
+                color: Colors.white,
+              ),
+            ),
 
+          ),
+          SizedBox(height: 30),
+          TextField(
+            maxLength: 10,
+            controller: phoneNumController,
+            style: TextStyle(
+              color: Colors.white,
             ),
-            SizedBox(height: 20),
-            TextField(
-              style: TextStyle(
-                color: Colors.white,
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.phone, color: Colors.white,),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red,
+                ),
               ),
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.red,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                labelText: 'Phone Number (U.S. only)',
-                labelStyle: TextStyle(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
                   color: Colors.white,
                 ),
               ),
+              labelText: LABEL_PHONE_NUMBER,
+              labelStyle: TextStyle(
+                color: Colors.white,
+              ),
             ),
-            SizedBox(height: 20),
-            RaisedButton(
-              color: Colors.red,
-              onPressed: () {
-
-              },
-              textColor: Colors.white,
-              child: Text('Send'),
-              elevation: 4,
-            ),
-          ],
-        )
-      );
+          ),
+          SizedBox(height: 10),
+          RaisedButton(
+            color: Colors.red,
+            onPressed: () {
+              this._presenter.prepareAnnoyRequest(toController.text, fromController.text, phoneNumController.text);
+            },
+            textColor: Colors.white,
+            child: Text('Send'),
+            elevation: 4,
+          ),
+        ],
+      )
+    );
   }
 }
