@@ -4,7 +4,6 @@ class AnnoyPresenter {
   AnnoyModel model = AnnoyModel();
   String prepareAnnoyRequest(String to, from, phoneNumber) {
     String modalMessage = model.postAnnoyRequest(to, from, phoneNumber);
-    print(modalMessage);
     return modalMessage;
   }
 }

@@ -29,6 +29,25 @@ class _AnnoyState extends State<AnnoyWidget> {
     super.dispose();
   }
 
+  void _showDialog(String response) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text(TITLE_RESPONSE_STATUS),
+          content: new Text(response),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text(BUTTON_CLOSE),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +133,8 @@ class _AnnoyState extends State<AnnoyWidget> {
           RaisedButton(
             color: Colors.red,
             onPressed: () {
-              this._presenter.prepareAnnoyRequest(toController.text, fromController.text, phoneNumController.text);
+             String resp = this._presenter.prepareAnnoyRequest(toController.text, fromController.text, phoneNumController.text);
+             _showDialog(resp);
             },
             textColor: Colors.white,
             child: Text('Send'),

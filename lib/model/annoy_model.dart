@@ -3,11 +3,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class AnnoyModel {
-  String _annoyURL = 'https://annoy.zedground.com/';
+  String _annoyURL = 'https://annoy.zedground.com/milk';
   String postAnnoyRequest(String to, from, phoneNumber) {
-    const milk = 'milk';
     var status;
-    http.post(_annoyURL + milk, headers: {'content-type': 'application/json'}, body: jsonEncode({'to': to, 'from': from, 'phoneNumber': phoneNumber}))
+    http.post(_annoyURL, headers: {'content-type': 'application/json'}, body: jsonEncode({'to': to, 'from': from, 'phoneNumber': phoneNumber}))
     .then((response) => {
       status = response.statusCode
     });
@@ -21,7 +20,7 @@ class AnnoyModel {
       }
       break;
       default: {
-        return RESPONSE_SUCCESS;
+        return RESPONSE_SUCCESS + to;
       }
       break;
     }
