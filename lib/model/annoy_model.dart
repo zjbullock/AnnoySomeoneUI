@@ -1,29 +1,42 @@
 import 'package:annoy_someone/utils/constants.dart';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class AnnoyModel {
   String _annoyURL = 'https://annoy.zedground.com/milk';
-  String postAnnoyRequest(String to, from, phoneNumber) {
-    var status;
-    http.post(_annoyURL, headers: {'content-type': 'application/json'}, body: jsonEncode({'to': to, 'from': from, 'phoneNumber': phoneNumber}))
-    .then((response) => {
-      status = response.statusCode
-    });
-    switch (status){
-      case 500: {
-        return RESPONSE_INTERNAL_SERVER_ERROR;
-      }
-      break;
-      case 400: {
-        return RESPONSE_STATUS_BAD_REQUEST;
-      }
-      break;
-      default: {
-        return RESPONSE_SUCCESS + to;
-      }
-      break;
-    }
+  Future<String> postAnnoyRequest(String to, from, phoneNumber) async{
+    var data = {'to': to, 'from': from, 'phoneNumber': phoneNumber};
+   final response = await http.post(
+     _annoyURL,
+     headers: {
+       "content-type": "application/json"
+     },
+     body: jsonEncode(data)
+   );
+   String resp;
+   switch (response.statusCode) {
+     case 500: {
+       print("internal server error");
+       resp = RESPONSE_INTERNAL_SERVER_ERROR;
+     }
+     break;
+     case 400: {
+       print("bad request");
+       resp = RESPONSE_STATUS_BAD_REQUEST;
+     }
+     break;
+     case 200: {
+       print("success");
+       resp = RESPONSE_SUCCESS + to;
+     }
+     break;
+     default: {
+       print("something weird happened");
+       resp = "Something odd happened";
+     }
+   }
+    return resp;
   }
 }
 

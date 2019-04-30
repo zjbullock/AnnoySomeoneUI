@@ -133,8 +133,9 @@ class _AnnoyState extends State<AnnoyWidget> {
           RaisedButton(
             color: Colors.red,
             onPressed: () {
-             String resp = this._presenter.prepareAnnoyRequest(toController.text, fromController.text, phoneNumController.text);
-             _showDialog(resp);
+             this._presenter.prepareAnnoyRequest(toController.text, fromController.text, phoneNumController.text).then((resp) => {
+               this._showDialog(resp)
+             });
             },
             textColor: Colors.white,
             child: Text('Send'),
