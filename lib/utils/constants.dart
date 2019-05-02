@@ -3,6 +3,7 @@ const BUTTON_CLOSE = 'Close';
 const LABEL_NAME_OF_PERSON_TO_ANNOY = 'Name of Person to Annoy';
 const LABEL_PHONE_NUMBER = 'Phone Number (U.S. only)';
 const LABEL_YOUR_NAME = 'Your Name';
+const LABEL_ZIP_CODE = 'Zip Code';
 const RESPONSE_INTERNAL_SERVER_ERROR = 'Server error has occurred';
 const RESPONSE_STATUS_BAD_REQUEST = 'Something happened connecting to service';
 const RESPONSE_SUCCESS = 'Successfully Annoyed ';

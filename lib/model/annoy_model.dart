@@ -5,8 +5,8 @@ import 'dart:convert';
 
 class AnnoyModel {
   String _annoyURL = 'https://annoy.zedground.com/milk';
-  Future<String> postAnnoyRequest(String to, from, phoneNumber) async{
-    var data = {'to': to, 'from': from, 'phoneNumber': phoneNumber};
+  Future<String> postAnnoyRequest(String to, from, phoneNumber, zipCode) async{
+    var data = {'to': to, 'from': from, 'phoneNumber': phoneNumber, 'zipCode': zipCode};
    final response = await http.post(
      _annoyURL,
      headers: {

@@ -19,6 +19,7 @@ class _AnnoyState extends State<AnnoyWidget> {
   final toController = TextEditingController();
   final fromController = TextEditingController();
   final phoneNumController = TextEditingController();
+  final zipCodeController = TextEditingController();
 
   @override
   void dispose() {
@@ -26,6 +27,7 @@ class _AnnoyState extends State<AnnoyWidget> {
     toController.dispose();
     fromController.dispose();
     phoneNumController.dispose();
+    zipCodeController.dispose();
     super.dispose();
   }
 
@@ -55,7 +57,6 @@ class _AnnoyState extends State<AnnoyWidget> {
       padding: EdgeInsets.all(20),
       child: Column(
         children: <Widget> [
-          SizedBox(height: 50),
           TextField(
             controller: toController,
             style: TextStyle(
@@ -79,7 +80,7 @@ class _AnnoyState extends State<AnnoyWidget> {
               ),
             ),
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 20),
           TextField(
             controller: fromController,
             style: TextStyle(
@@ -104,7 +105,31 @@ class _AnnoyState extends State<AnnoyWidget> {
             ),
 
           ),
-          SizedBox(height: 30),
+          SizedBox(height: 20),
+          TextField(
+            controller: zipCodeController,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.location_on, color: Colors.white,),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.white,
+                ),
+              ),
+              labelText: LABEL_ZIP_CODE,
+              labelStyle: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
           TextField(
             maxLength: 10,
             controller: phoneNumController,
@@ -133,7 +158,7 @@ class _AnnoyState extends State<AnnoyWidget> {
           RaisedButton(
             color: Colors.red,
             onPressed: () {
-             this._presenter.prepareAnnoyRequest(toController.text, fromController.text, phoneNumController.text).then((resp) => {
+             this._presenter.prepareAnnoyRequest(toController.text, fromController.text, phoneNumController.text, zipCodeController.text).then((resp) => {
                this._showDialog(resp)
              });
             },
